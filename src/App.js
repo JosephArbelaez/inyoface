@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
+<<<<<<< HEAD
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Navigation from './components/navigation/navigation';
 import Signin from './components/SignIn/SignIn';
@@ -10,6 +11,17 @@ import Rank from './components/rank/rank';
 import './App.css';
 
 const particlesOptions = {
+=======
+import Clarifai from 'clarifai';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition'
+import Register from'./components/Register/Register';
+
+const app = new Clarifai.App({
+  apiKey: '004d2238001c45199def97c3509d590c'
+ });
+
+ const particleOptions ={
+>>>>>>> parent of 2be9576... Pre-Check Final Changes
   particles: {
     number: {
       value: 30,
@@ -21,24 +33,12 @@ const particlesOptions = {
   }
 }
 
-const initialState = {
-  input: '',
-  imageUrl: '',
-  box: {},
-  route: 'signin',
-  isSignedIn: false,
-  user: {
-    id: '',
-    name: '',
-    email: '',
-    entries: 0,
-    joined: ''
-  }
-}
-
 class App extends Component {
+  //state
+
   constructor() {
     super();
+<<<<<<< HEAD
     this.state = initialState;
   }
 
@@ -52,6 +52,17 @@ class App extends Component {
     }})
   }
 
+=======
+    this.state = {
+      input: '',
+      imageUrl: '',
+      box: {},
+      route: 'signin',
+      isSignedIn: false
+    }
+  }
+
+>>>>>>> parent of 2be9576... Pre-Check Final Changes
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputimage');
@@ -75,6 +86,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
+<<<<<<< HEAD
       fetch('https://quiet-tor-90971.herokuapp.com/imageurl', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
@@ -109,6 +121,18 @@ class App extends Component {
       this.setState(initialState)
     } else if (route === 'home') {
       this.setState({isSignedIn: true})
+=======
+    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+    .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+    .catch(err => console.log(err));
+  }
+
+  onRouteChange = (route) => {
+    if (route === 'signin'){
+      this.setState({isSignedIn: false})
+    } else if (route === 'home') {
+        this.setState({route: route, isSignedIn: true});
+>>>>>>> parent of 2be9576... Pre-Check Final Changes
     }
     this.setState({route: route});
   }
@@ -124,6 +148,7 @@ class App extends Component {
         { route === 'home'
           ? <div>
               <Logo />
+<<<<<<< HEAD
               <Rank
                 name={this.state.user.name}
                 entries={this.state.user.entries}
@@ -138,6 +163,16 @@ class App extends Component {
              route === 'signin'
              ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
              : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+=======
+              <Rank />
+              <ImageLinkForm onInputChange = {this.onInputChange} onButtonSubmit = {this.onButtonSubmit} />
+              <FaceRecognition box={box} imageUrl={imageUrl} />
+            </div>
+          : (
+              route ==='signin'
+              ? <SignIn onRouteChange= {this.onRouteChange}/>
+              : <Register onRouteChange= {this.onRouteChange}/> 
+>>>>>>> parent of 2be9576... Pre-Check Final Changes
             )
         }
       </div>

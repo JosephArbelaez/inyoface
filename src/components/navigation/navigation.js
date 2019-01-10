@@ -1,6 +1,5 @@
 import React from 'react';
 
-// By making onRouteChange an arrow function, it allows onRouteChange to be called each time.
 const Navigation = ({onRouteChange, isSignedIn}) => {
     if(isSignedIn){
         return (

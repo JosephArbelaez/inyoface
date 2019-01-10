@@ -1,6 +1,5 @@
 import React from 'react';
 
-<<<<<<< HEAD
 class SignIn extends React.Component {
     constructor(props) {
         super(props);
@@ -38,10 +37,6 @@ class SignIn extends React.Component {
     render(){
         const { onRouteChange } = this.props;
         return (
-=======
-const SignIn = ({onRouteChange}) => {
-    return (
->>>>>>> parent of 2be9576... Pre-Check Final Changes
         <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
             <main className="pa4 black-80">
                 <form className="measure">
@@ -68,5 +63,5 @@ const SignIn = ({onRouteChange}) => {
         </article>
     );
 }
-
+}
 export default SignIn;
